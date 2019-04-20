@@ -13,7 +13,7 @@
 
 <ol> Clone the repo </ol> 
 
-<code> git clone https://github.com/AlanBayWalker/film-cloud.git </code>
+<code> git clone https://github.com/patrick-salvatore/Notes.git </code>
 
 <ol>Run npm install inside project root directory to install all dependencies</ol>
 
