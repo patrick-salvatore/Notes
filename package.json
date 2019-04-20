@@ -1,0 +1,31 @@
+{
+  "name": "notes",
+  "version": "1.0.0",
+  "description": "A journal app intend to create, express, and log all of your ideas",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js"
+  },
+  "author": "Patrick Salvatore",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.15.6",
+    "express-sessions": "^1.0.6",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.20",
+    "passport": "^0.4.0",
+    "passport-github": "^1.1.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose-email": "^0.1.4"
+  }
+}
