@@ -2,23 +2,24 @@ const express = require('express'),
     router = express.Router(),
     checkUser = require('../middleware/verifyUser'),
     User = require('../models/user'),
-    messageEntry = require('../models/messageEntry');
+    messages = require('../models/messages');
 
-
-router.get('/messages', (req, res) => {
-    messageEntry.find((err, message) => {
+// GET ALL MESSAGES FROM DB
+router.get('/', (req, res) => {
+    messages.find((err, messages) => {
         if (err) {
-            console.log(err)
+            res.sendStatus(404)
         } else {
-            res.json(message)
+            res.json({messages})
         }
     })
 })
 
+// POST MESSAGES TO DB
 router.post('/add', checkUser, (req, res) => {
     User.findById(req.user.id) 
         .then((user) => {
-           const newMsg = new messageEntry({
+           const newMsg = new messages({
                body: req.body.message, 
                author: {
                    id: req.user.id,
@@ -30,8 +31,9 @@ router.post('/add', checkUser, (req, res) => {
         })
 })
 
+// DELETE SPECIFIC MESSAGE FROM DB
 router.delete('/delete/:id', (req, res) => {
-    messageEntry.findbyIdAndRemove({_id: req.params.id}, function(err, post) {
+    messages.deleteOne({_id: req.params.id}, function(err, post) {
         if (err) res.json(err)
         else res.json({msg: req.params.id})
     })

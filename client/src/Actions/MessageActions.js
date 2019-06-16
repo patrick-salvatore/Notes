@@ -5,22 +5,23 @@ const url = 'http://localhost:3001/API/messages';
 
 
 /*GET MESSAGES FROM STATE*/
-export const recieveMessages = (message) => {
+export const recieveMessages = messages => {
     return {
         type: FETCH_MESSAGE,
-        message
+        messages
     }
 }
 
-export const fetchMessage = () => {
-    return (dispatch) => {
-        axios.get(`${url}/messages`)
-        .then(res => {
-            dispatch(recieveMessages(res.data))
-        })
-        .catch(err => {
+export const fetchMessages =  () => {
+    return async (dispatch) => {
+        try {
+            const res = await axios.get(`${url}/`)
+            const data = await res.data
+            return dispatch(recieveMessages(data.messages))
+        }
+        catch(err) {
             throw err
-        })
+        }
     }
 }
 

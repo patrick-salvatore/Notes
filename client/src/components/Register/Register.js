@@ -32,6 +32,7 @@ import './Register.css';
     .then(() => { 
       this.setState({registered: true})
     })
+    .catch(err => console.log(err))
 
     this.setState.formFields = {
       name: '',
@@ -44,7 +45,7 @@ import './Register.css';
   render() {
     if (this.state.registered) {
       return (
-        <Redirect to= '/board'/> 
+        <Redirect to= '/'/> 
       )
     }
     return (

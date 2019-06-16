@@ -2,13 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom'
 import './index.scss';
-import App from './App';
-
+import App from './components/APP/App';
 import {Provider} from 'react-redux';
 import store from './store';
-import {fetchMessage} from './Actions/MessageActions';
-
-store.dispatch(fetchMessage());
 
 const app = (
         <Provider store= {store}>

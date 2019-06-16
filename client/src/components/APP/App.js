@@ -3,10 +3,10 @@ import './App.scss';
 import {Route, Switch} from 'react-router-dom';
 
 // components 
-import Board from './components/Board/Board'
-import Login from './components/Login/Login'
-import Register from './components/Register/Register'
-import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+import Board from '../Board/Board'
+import Login from '../Login/Login'
+import Register from '../Register/Register'
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
 
 
 class App extends Component {

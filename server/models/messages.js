@@ -1,7 +1,7 @@
 const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-const JournalEntrySchema = new Schema({
+const messagesSchema = new Schema({
     body: {
         type: String,
         required: true
@@ -21,4 +21,5 @@ const JournalEntrySchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('messageEntry', JournalEntrySchema)
+
+module.exports = mongoose.model('message', messagesSchema)

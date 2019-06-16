@@ -1,35 +1,34 @@
 const express = require('express'),
     router = express.Router(),
     User = require('../models/user'),
-    mongoose = require('mongoose'),
     bcrypt = require('bcryptjs'),
-    passport = require('passport'), 
     keys = require('../config/config'),
     jwt = require('jsonwebtoken'); 
 
 
 router.post('/register', (req, res) => {
     const errors = []
-
+    const { username, email, password, password2 } = req.body
+    console.log(req.body)
     // check register criteria
-    if (req.body.password !== req.body.password2) {
+    if (password !== password2) {
         errors.push({
             text: 'passwords do not match.',
         })
     }
-    if (req.body.password < 6) {
+    if (password < 6) {
         errors.push({
-            text: 'Password must be at least 4 characters.',
+            text: 'Password must be at least 6 characters.',
         })
     }
-    if (req.body.email.length < 1) {
+    if (email.length < 1) {
         errors.push({
             text: 'Please enter an email',
         })
     }
     // check for errors, if none proceed
     if (errors.length > 0) {
-        res.status(400).send({errors})
+        res.send({errors}).sendStatus(400)
     } else {
         let newUser = new User(req.body)
         User.findOne({
@@ -37,9 +36,9 @@ router.post('/register', (req, res) => {
             })
             .then((user) => {
                 if (user) {
-                    res.status(400).json({
+                    res.json({
                         msg: 'email has already been registered'
-                    })
+                    }).sendStatus(400)
                 } else {
                     // handle email case
                     let email = newUser.email;
@@ -55,8 +54,7 @@ router.post('/register', (req, res) => {
                                     res.status(200).send("Success! Thank you for signing up")
                                 })
                                 .catch((err) => {
-                                    // res.status(400).send("Sorry! We were unable to log your account into our database")
-                                    res.send(err)
+                                    res.status(400).send("Sorry! We were unable to log your account into our database")
                                 })
                         })
                     })

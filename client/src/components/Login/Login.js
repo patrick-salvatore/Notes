@@ -44,12 +44,12 @@ export default class Login extends Component {
   render(props) {
     if (this.state.authentication) {
       return (
-        <Redirect to= '/board'/> 
+        <Redirect to= '/'/> 
       )
     }
     return (
     <div className= 'container'>
-      <div className='card border-primary'>
+      <div className='card border-primary' style = {{marginTop: '15px'}}>
         <div className='card-header'>
           <h2>Login</h2>
           <p>Get ready to let your ideas out</p>

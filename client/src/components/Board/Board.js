@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+
+import {fetchMessages} from '../../Actions/MessageActions'
+
+// components 
 import NavBar from '../NavBar/NavBar';
 import ModalWrapper from '../Modal/ModalWrapper';
 import MessageList from '../Message/MessageList';
 
+class Board extends Component {
+ 
+  async componentWillMount() {
+   await this.props.fetchPosts()
+  }
 
- class Board extends Component {
   render() {
     return (
       <div>
-        <MessageList/> 
+        <MessageList /> 
         <ModalWrapper/>
         <NavBar/>
       </div>
     )
   }
 }
-export default Board;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchPosts: function(){
+      return dispatch(fetchMessages())
+    }
+  } 
+}
+
+export default connect(null, mapDispatchToProps)(Board);

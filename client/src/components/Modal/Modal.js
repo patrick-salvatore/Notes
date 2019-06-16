@@ -15,27 +15,25 @@ class Modal extends Component {
      super (props)
      this.state = {
          showModal: false,
-         formFields: {
-           message: ''
-         }
+         message: ''
         }
       }
 
-  inputChangeHandler = (e) => {
-    let formFields = {...this.state.formFields}; 
-    formFields[e.target.name] = e.target.value;
-    this.setState({formFields});
+  handleChange = (e) => {
+    const message = e.target.value;
+    this.setState({message});
   }
     
   handleShowModal = () => {
       this.setState({
-          showModal: !this.state.showModal
+          showModal: !this.state.showModal,
+          message: ''
       })
   }
         
   messsageSubmit = (e) => {
     e.preventDefault()
-    let messageData = {...this.state.formFields}
+    let messageData = this.state.message
     this.props.onAddPost(messageData)
     this.handleShowModal()
   }
@@ -59,7 +57,7 @@ class Modal extends Component {
               <form className='message-form' onSubmit = {e => this.messsageSubmit(e)}>
                 <div className="form-group">
                   <label htmlFor="messageInput">Message</label>
-                  <textarea type="text" className="form-control" id="messageInput" name = 'message' placeholder="Your Message" onChange= {e => this.inputChangeHandler(e)}></textarea>
+                  <textarea type="text" className="form-control" id="messageInput" name = 'message' placeholder="Your Message" onChange= {this.handleChange}></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
               </form> 

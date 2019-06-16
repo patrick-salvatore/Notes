@@ -3,8 +3,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     passport = require('passport'),
-    userRoutes = require('./server/routes/user'), 
-    messageRoutes = require('./server/routes/messageEntries'),
+    userRoutes = require('./routes/user'), 
+    messagesRoutes = require('./routes/messages'),
     cors = require('cors'),
     port = 3001;
 
@@ -20,9 +20,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
-require('./server/config/passport')(passport);
+require('./config/passport')(passport);
 app.use('/API/users', userRoutes);
-app.use('/API/messages', messageRoutes);
+app.use('/API/messages', messagesRoutes);
 
 
 app.listen(port, () => {

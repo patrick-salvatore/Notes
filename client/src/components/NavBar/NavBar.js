@@ -6,30 +6,24 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import {Link} from 'react-router-dom';
 
-
+const logOut = () => {
+  localStorage.removeItem('jwt');
+}
 
 function BottomAppBar(props) {
   const { classes } = props;
+  const auth = localStorage.getItem('jwt')
 
   return (
     <Fragment>
         <AppBar position="fixed" color="primary" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-              {/* <Fab color="secondary" aria-label="Add" className={classes.fabButton} >
-                  <Modal/>
-              </Fab> */}
             <div>
-              <IconButton color="inherit">
-                <Link to='/users/login' style={{
-                        color: 'white'
-                      }}>Login</Link>
+              <IconButton color="inherit" onClick = {() => logOut()}>
+                { auth ? <Link to = '/users/login' style={{color: 'white'}} > Logout </Link> : <Link to='/users/login' style={{color: 'white'}}>Login</Link> }
               </IconButton>
               <IconButton color="inherit">
-                <Link to='/users/register' 
-                      style={{color: 'white'}}
-                >
-                  Register
-                </Link>
+                 <Link to='/users/register' style={{color: 'white'}}>Register</Link>
               </IconButton>
             </div>
           </Toolbar>

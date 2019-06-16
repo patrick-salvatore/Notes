@@ -1,45 +1,34 @@
 import React from 'react';
-import {deleteMessage} from "../../Actions/MessageActions";
 import {connect} from 'react-redux';
 import Message from './Message';
 
-const MessageList = ({messages, deleteMessage}) => {
+const MessageList = (props) => {
+  const {messages} =  props
+  
    return (
-     <div style= {styles}>
-       {messages.map(msg => {
-         return (
-            <Message
-              msg = {msg}
-              onDelete = {deleteMessage}
-              key = {msg._id}
-            >
-            </Message>
-        )
-       })}
+     <div style= {styles}> 
+      {messages.messages.length > 0 && messages.messages.map((message, i) => (
+        <Message
+          key = {i}
+          message = {message}
+          />
+      ))}
      </div>
    )
 }
 
 const styles = {
-  margin: '0 auto',
+  marginBottom: '64px',
   alignItems: 'center',
   justifyContent: 'center',
   flexDirection: 'column', 
   display: 'flex',
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps =  (state) => {
   return {
-    messages: state.messages
+    messages: state
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    OndeletePost: function(id) {
-      return dispatch(deleteMessage(id))
-    }
-  }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(MessageList);
+export default connect(mapStateToProps, null)(MessageList);
